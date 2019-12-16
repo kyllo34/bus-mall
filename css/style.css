@@ -1,0 +1,8 @@
+header > img {
+  height: 100px;
+  float: left;
+}
+header {
+  background-color: aquamarine;
+  height: 100px;
+}
