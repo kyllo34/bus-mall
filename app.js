@@ -1,8 +1,10 @@
 'use strict';
 // set variable equal to image tag
 var imageEl = document.getElementsByTagName('img');
-
-var totalClicks = -1;
+var imageIndex1 = 0;
+var imageIndex2 = 1;
+var imageIndex3 = 2;
+var totalClicks = 0;
 // object constructor for all images
 var allImages = [];
 function Image(name, imageUrl){
@@ -38,14 +40,21 @@ new Image('wine-glass', 'img/wine-glass.jpg');
 // function for when there is an event
 function displayImages(event) {
   totalClicks++;
-  // first image rendered = random number * (imageEl -1)
+  // log clicks per image
+  if (event.srcElement.id === '1') {
+    allImages[imageIndex1].imageClicks++;
+  } else if (event.srcElement.id === '2') {
+    allImages[imageIndex2].imageClicks++;
+  } else if (event.srcElement.id === '3') {
+    allImages[imageIndex3].imageClicks++;
+  }
+  // pick 3 random images to display
   imageEl[1].src = allImages[Math.floor(Math.random() * allImages.length)].imageUrl;
+  
   imageEl[2].src = allImages[Math.floor(Math.random() * allImages.length)].imageUrl;
+  
   imageEl[3].src = allImages[Math.floor(Math.random() * allImages.length)].imageUrl;
 }
-
-// We call the imagewasclicked function first to generate 3 random images
-displayImages();
 
 // create an event listener for images
 // make it listen to all images displayed except the first image as it is the logo
