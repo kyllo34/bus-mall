@@ -6,3 +6,15 @@ header {
   background-color: aquamarine;
   height: 100px;
 }
+.results {
+  border: solid 2px black;
+  width: 120px;
+  height: 480px;
+}
+div > img {
+  width: 280px;
+  height: 280px;
+}
+div {
+  float: left;
+}
