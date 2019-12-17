@@ -17,7 +17,7 @@ function Image(name, imageUrl){
   allImages.push(this);
 }
 
-// function that returns array containing. used part of demo code
+// function that returns array containing property of objects. used part of demo code
 function imageArray(property) {
   var answer = [];
   for (var i = 0; i < allImages.length; i++) {
@@ -45,6 +45,24 @@ new Image('tauntaun', 'img/tauntaun.jpg');
 new Image('unicorn', 'img/unicorn.jpg');
 new Image('water-can', 'img/water-can.jpg');
 new Image('wine-glass', 'img/wine-glass.jpg');
+
+// creates random color for dataset from https://stackoverflow.com/questions/1484506/random-color-generator
+var clicksColorArray = [];
+var viewColorArray = [];
+function randomColorArray() {
+  for (var j = 0; j < allImages.length; j++) {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    //adds transparency to view bars
+    viewColorArray[j] = color + '80';
+    clicksColorArray[j] = color + `D0`;
+  }
+} 
+randomColorArray();
+
 
 // function for when there is an event
 function displayImages(event) {
@@ -107,8 +125,8 @@ function displayImages(event) {
                 data: imageArray('imageClicks'),
                 backgroundColor: clicksColorArray,
                 borderColor: 'red',
-                borderWidth: 1.2,
-                barPercentage: 1.2
+                borderWidth: 1.0,
+                barPercentage: 1.0
             },{
               label: '# of Views',
               data: imageArray('imageViews'),
@@ -140,21 +158,4 @@ for (var i = 1; i < imageEl.length; i++) {
 }
 
 displayImages();
-
-// creates random color for dataset from https://stackoverflow.com/questions/1484506/random-color-generator
-var clicksColorArray = [];
-var viewColorArray = [];
-function randomColorArray() {
-  for (var j = 0; j < allImages.length; j++) {
-    var letters = '0123456789ABCDEF';
-    var color = '#';
-    for (var i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    //adds transparency to view bars
-    viewColorArray[j] = color + '80';
-    clicksColorArray[j] = color + `F0`;
-  }
-} 
-randomColorArray();
 
