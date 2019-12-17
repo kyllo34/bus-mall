@@ -49,11 +49,27 @@ function displayImages(event) {
     allImages[imageIndex3].imageClicks++;
   }
   // pick 3 random images to display
-  imageEl[1].src = allImages[Math.floor(Math.random() * allImages.length)].imageUrl;
+  var nextImageIndex1 = Math.floor(Math.random() * allImages.length);
+  while ((nextImageIndex1 === imageIndex1) || (nextImageIndex1 === imageIndex2) || (nextImageIndex1 === imageIndex3)) {
+    nextImageIndex1 = Math.floor(Math.random() * allImages.length);
+  }
+  var nextImageIndex2 = Math.floor(Math.random() * allImages.length);
+  while ((nextImageIndex2 === imageIndex1) || (nextImageIndex2 === imageIndex2) || (nextImageIndex2 === imageIndex3) || (nextImageIndex2 === nextImageIndex1)) {
+    nextImageIndex2 = Math.floor(Math.random() * allImages.length);
+  }
+  var nextImageIndex3 = Math.floor(Math.random() * allImages.length);
+  while ((nextImageIndex3 === imageIndex1) || (nextImageIndex3 === imageIndex2) || (nextImageIndex3 === imageIndex3) || (nextImageIndex3 === nextImageIndex1) || (nextImageIndex3 === nextImageIndex2)) {
+    nextImageIndex3 = Math.floor(Math.random() * allImages.length);
+  }  
+  // new indexes for images
+  imageIndex1 = nextImageIndex1;
+  imageIndex2 = nextImageIndex2;
+  imageIndex3 = nextImageIndex3;
+  // display new images
+  imageEl[1].src = allImages[imageIndex1].imageUrl;
+  imageEl[2].src = allImages[imageIndex2].imageUrl;
+  imageEl[3].src = allImages[imageIndex3].imageUrl;
   
-  imageEl[2].src = allImages[Math.floor(Math.random() * allImages.length)].imageUrl;
-  
-  imageEl[3].src = allImages[Math.floor(Math.random() * allImages.length)].imageUrl;
 }
 
 // create an event listener for images
