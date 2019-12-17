@@ -1,0 +1,25 @@
+header > img {
+  height: 100px;
+  float: left;
+}
+header {
+  background-color: aquamarine;
+  height: 100px;
+}
+.results {
+  border: solid 2px black;
+  width: 240px;
+  height: 480px;
+}
+div > img {
+  width: 280px;
+  height: 280px;
+}
+div {
+  float: left;
+}
+ul {
+  list-style-type: disc;
+  list-style-position: inside;
+}
+
