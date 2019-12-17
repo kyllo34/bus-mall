@@ -17,9 +17,11 @@ function Image(name, imageUrl, imageClicks, imageViews){
   allImages.push(this);
 }
 // We know what the first three images are
+// TODO: Create loop that creates objects
+
 
 // Create images
-new Image('bag', 'img/bag.jpg',0, 1);
+new Image('bag', 'img/bag.jpg');
 new Image('banana', 'img/banana.jpg');
 new Image('bathroom', 'img/bathroom.jpg');
 new Image('boots', 'img/boots.jpg');
@@ -44,7 +46,7 @@ function displayImages(event) {
   if (totalClicks < userCount) {
     totalClicks++;
     // if there was no event then ignore this condition
-    if (event !== undefined) {
+    if (event) {
     // log clicks per image
       if (event.srcElement.id === '1') {
         allImages[imageIndex1].imageClicks++;
@@ -56,7 +58,7 @@ function displayImages(event) {
     }
     // pick 3 random images to display
     var nextImageIndex1 = Math.floor(Math.random() * allImages.length);
-    while ((nextImageIndex1 === imageIndex1) || (nextImageIndex1 === imageIndex2) || (nextImageIndex1 === imageIndex3)) {
+    while ((nextImageIndex1 === imageIndex1) || (nextImageIndex1 === imageIndex2) || (nextImageIndex1 === imageIndex3) || (nextImageIndex1 === imageIndex3)) {
       nextImageIndex1 = Math.floor(Math.random() * allImages.length);
     }
     var nextImageIndex2 = Math.floor(Math.random() * allImages.length);

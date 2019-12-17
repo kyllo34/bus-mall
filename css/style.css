@@ -1,19 +1,45 @@
+body {
+  background-color: rgb(190, 190, 190);
+}
 header > img {
-  height: 100px;
+  height: 80px;
   float: left;
 }
 header {
-  background-color: aquamarine;
-  height: 100px;
+  background-color: rgb(104, 104, 104);
+  height: 80px;
+}
+h1 {
+  font-size: 80px;
+  float: left;
+  padding-left: 20px;
+  color: aliceblue;
+  text-shadow: 4px 4px 2px gray;
 }
 .results {
   border: solid 2px black;
   width: 240px;
-  height: 480px;
+  height: auto;
+  border-radius: 5px;
+  padding: 4px;
+  background-color: rgb(153, 153, 153);
+  color: aliceblue;
+}
+h2 {
+  font-size: 30px;
+  text-shadow: 2px 2px gray;
+}
+h2:after{
+  content:' ';
+  display:block;
+  border:1px solid rgb(92, 87, 87);
 }
 div > img {
   width: 280px;
   height: 280px;
+  border: solid 2px black;
+  border-radius: 5px;
+  margin-left: 5px;
 }
 div {
   float: left;
