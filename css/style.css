@@ -8,7 +8,7 @@ header {
 }
 .results {
   border: solid 2px black;
-  width: 120px;
+  width: 240px;
   height: 480px;
 }
 div > img {
@@ -18,3 +18,4 @@ div > img {
 div {
   float: left;
 }
+

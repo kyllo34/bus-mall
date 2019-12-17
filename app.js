@@ -80,14 +80,15 @@ function displayImages(event) {
     allImages[imageIndex2].imageViews += 1;
     allImages[imageIndex3].imageViews += 1;
   } else {
-    removeEventListener('click', displayImages);
+    for (var i = 1; i < imageEl.length; i++) {
+      imageEl[i].removeEventListener('click', displayImages);
+    }
     // create list of products with views and clicks
     var listContainer = document.getElementsByTagName('ul')[0];
-    for (var i = 0; i < allImages.length; i ++) {
+    for (var i = 0; i < allImages.length; i ++  ) {
       var listItem = document.createElement('li');
-      listItem.innerHTML = allImages[i].imageClicks;
+      listItem.textContent = `${allImages[i].name}: ${allImages[i].imageClicks} votes, ${allImages[i].imageViews} views.` ;
       listContainer.appendChild(listItem);
-      console.log(allImages[i].imageClicks);
     }
   }
 }
