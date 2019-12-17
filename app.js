@@ -166,3 +166,17 @@ for (var i = 1; i < imageEl.length; i++) {
 
 displayImages();
 
+// creates random color for dataset from https://stackoverflow.com/questions/1484506/random-color-generator
+function randomColorArray() {
+  var answer = [];
+  for (var j = 0; j < allImages.length; j++) {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    answer[j] = color;
+  }
+  return color;
+}
+
