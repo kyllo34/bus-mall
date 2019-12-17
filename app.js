@@ -5,6 +5,8 @@ var imageIndex1 = 0;
 var imageIndex2 = 1;
 var imageIndex3 = 2;
 var totalClicks = -1;
+// controls how many times a user can make a selection
+var userCount = 25;
 // object constructor for all images
 var allImages = [];
 function Image(name, imageUrl, imageClicks, imageViews){
@@ -39,7 +41,7 @@ new Image('wine-glass', 'img/wine-glass.jpg');
 
 // function for when there is an event
 function displayImages(event) {
-  if (totalClicks < 25) {
+  if (totalClicks < userCount) {
     totalClicks++;
     // if there was no event then ignore this condition
     if (event !== undefined) {
@@ -78,7 +80,15 @@ function displayImages(event) {
     allImages[imageIndex2].imageViews += 1;
     allImages[imageIndex3].imageViews += 1;
   } else {
-    
+    removeEventListener('click', displayImages);
+    // create list of products with views and clicks
+    var listContainer = document.getElementsByTagName('ul')[0];
+    for (var i = 0; i < allImages.length; i ++) {
+      var listItem = document.createElement('li');
+      listItem.innerHTML = allImages[i].imageClicks;
+      listContainer.appendChild(listItem);
+      console.log(allImages[i].imageClicks);
+    }
   }
 }
 
