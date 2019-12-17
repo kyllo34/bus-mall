@@ -6,7 +6,7 @@ var imageIndex2 = 0;
 var imageIndex3 = 0;
 var totalClicks = -1;
 // controls how many times a user can make a selection
-var userCount = 25;
+var userCount = 5;
 // object constructor for all images
 var allImages = [];
 function Image(name, imageUrl){
@@ -20,10 +20,10 @@ function Image(name, imageUrl){
 // function that returns array containing. used part of demo code
 function imageArray(property) {
   var answer = [];
-  for (var i = 0; i < allImages.length) {
+  for (var i = 0; i < allImages.length; i++) {
     answer[i] = allImages[i][property];
   }
-  return property;
+  return answer;
 }
 // Create images
 new Image('bag', 'img/bag.jpg');
@@ -97,7 +97,45 @@ function displayImages(event) {
       listItem.textContent = `${allImages[i].name}: ${allImages[i].imageClicks} votes, ${allImages[i].imageViews} views.` ;
       listContainer.appendChild(listItem);
     }
+    var ctx = document.getElementById('resultsChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: imageArray('name'),
+            datasets: [{
+                label: '# of Votes',
+                data: imageArray('imageClicks'),
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
   }
+      
 }
 
 // create an event listener for images
@@ -108,40 +146,3 @@ for (var i = 1; i < imageEl.length; i++) {
 
 displayImages();
 
-var ctx = document.getElementById('myChart');
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
