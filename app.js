@@ -2,24 +2,29 @@
 // set variable equal to image tag
 var imageEl = document.getElementsByTagName('img');
 var imageIndex1 = 0;
-var imageIndex2 = 1;
-var imageIndex3 = 2;
+var imageIndex2 = 0;
+var imageIndex3 = 0;
 var totalClicks = -1;
 // controls how many times a user can make a selection
 var userCount = 25;
 // object constructor for all images
 var allImages = [];
-function Image(name, imageUrl, imageClicks, imageViews){
+function Image(name, imageUrl){
   this.name = name;
   this.imageUrl = imageUrl;
   this.imageClicks = 0;
   this.imageViews = 0;
   allImages.push(this);
 }
-// We know what the first three images are
-// TODO: Create loop that creates objects
 
-
+// function that returns array containing property of objects. used part of demo code
+function imageArray(property) {
+  var answer = [];
+  for (var i = 0; i < allImages.length; i++) {
+    answer[i] = allImages[i][property];
+  }
+  return answer;
+}
 // Create images
 new Image('bag', 'img/bag.jpg');
 new Image('banana', 'img/banana.jpg');
@@ -40,6 +45,24 @@ new Image('tauntaun', 'img/tauntaun.jpg');
 new Image('unicorn', 'img/unicorn.jpg');
 new Image('water-can', 'img/water-can.jpg');
 new Image('wine-glass', 'img/wine-glass.jpg');
+
+// creates random color for dataset from https://stackoverflow.com/questions/1484506/random-color-generator
+var clicksColorArray = [];
+var viewColorArray = [];
+function randomColorArray() {
+  for (var j = 0; j < allImages.length; j++) {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    //adds transparency to view bars
+    viewColorArray[j] = color + '80';
+    clicksColorArray[j] = color + `D0`;
+  }
+} 
+randomColorArray();
+
 
 // function for when there is an event
 function displayImages(event) {
@@ -92,7 +115,40 @@ function displayImages(event) {
       listItem.textContent = `${allImages[i].name}: ${allImages[i].imageClicks} votes, ${allImages[i].imageViews} views.` ;
       listContainer.appendChild(listItem);
     }
+    var ctx = document.getElementById('resultsChart');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: imageArray('name'),
+            datasets: [{
+                label: '# of Votes',
+                data: imageArray('imageClicks'),
+                backgroundColor: clicksColorArray,
+                borderColor: 'red',
+                borderWidth: 1.0,
+                barPercentage: 1.0
+            },{
+              label: '# of Views',
+              data: imageArray('imageViews'),
+              backgroundColor: viewColorArray,
+              borderColor: 'black',
+              borderWidth: 1,
+          }]
+        },
+        options: {
+            scales: {
+                xAxes: [{ stacked: true }],
+                yAxes: [{
+                    stacked:true,
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
   }
+      
 }
 
 // create an event listener for images
@@ -102,3 +158,4 @@ for (var i = 1; i < imageEl.length; i++) {
 }
 
 displayImages();
+
