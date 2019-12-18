@@ -1,12 +1,16 @@
 'use strict';
-// set variable equal to image tag
-var imageEl = document.getElementsByTagName('img');
-var imageIndex1 = 0;
-var imageIndex2 = 0;
-var imageIndex3 = 0;
+
+// starts with negative one as totalclicks is tallied when initial images are displayed
 var totalClicks = -1;
 // controls how many times a user can make a selection
 var userCount = 25;
+// number of images desired to display
+var displayImgNum = 3;
+// create image element
+var imageEl = new Array(displayImgNum).fill(document.createElement('img'));
+// initiates index arrays for displayed images
+var currentImgIndex = new Array(displayImgNum).fill(0);
+var nextImgIndex = new Array(displayImgNum).fill(0);
 // object constructor for all images
 var allImages = [];
 function Image(name, imageUrl){
@@ -68,42 +72,28 @@ randomColorArray();
 function displayImages(event) {
   if (totalClicks < userCount) {
     totalClicks++;
-    // if there was no event then ignore this condition
-    if (event) {
-    // log clicks per image
-      if (event.srcElement.id === '1') {
-        allImages[imageIndex1].imageClicks++;
-      } else if (event.srcElement.id === '2') {
-        allImages[imageIndex2].imageClicks++;
-      } else if (event.srcElement.id === '3') {
-        allImages[imageIndex3].imageClicks++;
+    }
+    // pick x number of random images to display
+    for (var i = 0; i <= displayImgNum; i++) {
+      var tempNum = Math.ceil(Math.random() * allImages.length);
+      while (currentImgIndex.includes(tempNum) || nextImgIndex.includes(tempNum)) {
+        tempNum = Math.ceil(Math.random() * allImages.length);
       }
+      // new indexes for images
+      nextImgIndex[i] = tempNum; 
+
+      // display new image
+      imageEl[i].src = allImages[nextImgIndex[i]].imageUrl;
+      // track image view
+      allImages[nextImgIndex[i]].imageViews += 1;
+      // if there was no event then ignore this condition
+      if (event) {
+          // log clicks per image
+          if (event.srcElement.id === String(nextImgIndex[i])) {
+            allImages[nextImgIndex[i]].imageClicks++;
+
     }
-    // pick 3 random images to display
-    var nextImageIndex1 = Math.floor(Math.random() * allImages.length);
-    while ((nextImageIndex1 === imageIndex1) || (nextImageIndex1 === imageIndex2) || (nextImageIndex1 === imageIndex3) || (nextImageIndex1 === imageIndex3)) {
-      nextImageIndex1 = Math.floor(Math.random() * allImages.length);
-    }
-    var nextImageIndex2 = Math.floor(Math.random() * allImages.length);
-    while ((nextImageIndex2 === imageIndex1) || (nextImageIndex2 === imageIndex2) || (nextImageIndex2 === imageIndex3) || (nextImageIndex2 === nextImageIndex1)) {
-      nextImageIndex2 = Math.floor(Math.random() * allImages.length);
-    }
-    var nextImageIndex3 = Math.floor(Math.random() * allImages.length);
-    while ((nextImageIndex3 === imageIndex1) || (nextImageIndex3 === imageIndex2) || (nextImageIndex3 === imageIndex3) || (nextImageIndex3 === nextImageIndex1) || (nextImageIndex3 === nextImageIndex2)) {
-      nextImageIndex3 = Math.floor(Math.random() * allImages.length);
-    }  
-    // new indexes for images
-    imageIndex1 = nextImageIndex1;
-    imageIndex2 = nextImageIndex2;
-    imageIndex3 = nextImageIndex3;
-    // display new images
-    imageEl[1].src = allImages[imageIndex1].imageUrl;
-    imageEl[2].src = allImages[imageIndex2].imageUrl;
-    imageEl[3].src = allImages[imageIndex3].imageUrl;
-    // track views per image
-    allImages[imageIndex1].imageViews += 1;
-    allImages[imageIndex2].imageViews += 1;
-    allImages[imageIndex3].imageViews += 1;
+
   } else {
     for (var i = 1; i < imageEl.length; i++) {
       imageEl[i].removeEventListener('click', displayImages);
