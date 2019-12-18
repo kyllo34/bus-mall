@@ -105,9 +105,6 @@ function displayImages(event) {
     allImages[imageIndex2].imageViews += 1;
     allImages[imageIndex3].imageViews += 1;
   } else {
-    for (var i = 1; i < imageEl.length; i++) {
-      imageEl[i].removeEventListener('click', displayImages);
-    }
     // create list of products with views and clicks
     var listContainer = document.getElementsByTagName('ul')[0];
     for (var i = 0; i < allImages.length; i ++  ) {
@@ -147,6 +144,10 @@ function displayImages(event) {
             }
         }
     });
+    // remove event listener
+    for (var i = 1; i < imageEl.length; i++) {
+      imageEl[i].removeEventListener('click', displayImages);
+    }
   }
       
 }
