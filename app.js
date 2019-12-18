@@ -1,4 +1,5 @@
 'use strict';
+var imageStorageArray = [];
 // set variable equal to image tag
 var imageEl = document.getElementsByTagName('img');
 var imageIndex1 = 0;
@@ -66,7 +67,6 @@ randomColorArray();
 
 // function for when there is an event
 function displayImages(event) {
-  console.log(totalClicks);
   totalClicks++;
   // if there was no event then ignore this condition
   if (event) {
@@ -149,6 +149,26 @@ function displayImages(event) {
     for (var i = 1; i < imageEl.length; i++) {
       imageEl[i].removeEventListener('click', displayImages);
     }
+
+
+
+    // stores results in local storage
+    if (localStorage.getItem('allImages') === null) {
+      localStorage.setItem('allImages', JSON.stringify(allImages));
+    } else {
+      var imageStorageArray = JSON.parse(localStorage.getItem('allImages'));
+      console.log(imageStorageArray);
+      // for (var i = 0; i < imageStorageArray.length; i ++) {
+      //   console.log(imageStorageArray[i].name);
+      //   new Image(imageStorageArray[i].name, imageStorageArray[i].imageUrl, imageStorageArray[i].imageClicks, imageStorageArray[i].imageViews);
+        
+
+      }
+    
+
+
+
+
   }
       
 }
