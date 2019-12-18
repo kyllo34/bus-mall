@@ -128,11 +128,11 @@ function displayImages(event) {
                 borderWidth: 1.0,
                 barPercentage: 1.0
             },{
-              label: '# of Views',
-              data: imageArray('imageViews'),
-              backgroundColor: viewColorArray,
-              borderColor: 'black',
-              borderWidth: 1,
+                label: '# of Views',
+                data: imageArray('imageViews'),
+                backgroundColor: viewColorArray,
+                borderColor: 'black',
+                borderWidth: 1,
           }]
         },
         options: {
