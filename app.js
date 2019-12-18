@@ -6,7 +6,7 @@ var imageIndex2 = 0;
 var imageIndex3 = 0;
 var totalClicks = -1;
 // controls how many times a user can make a selection
-var userCount = 25;
+var userCount = 1;
 // object constructor for all images
 var allImages = [];
 function Image(name, imageUrl){
@@ -66,19 +66,20 @@ randomColorArray();
 
 // function for when there is an event
 function displayImages(event) {
-  if (totalClicks < userCount) {
-    totalClicks++;
-    // if there was no event then ignore this condition
-    if (event) {
-    // log clicks per image
-      if (event.srcElement.id === '1') {
-        allImages[imageIndex1].imageClicks++;
-      } else if (event.srcElement.id === '2') {
-        allImages[imageIndex2].imageClicks++;
-      } else if (event.srcElement.id === '3') {
-        allImages[imageIndex3].imageClicks++;
-      }
+  console.log(totalClicks);
+  totalClicks++;
+  // if there was no event then ignore this condition
+  if (event) {
+  // log clicks per image
+    if (event.srcElement.id === '1') {
+      allImages[imageIndex1].imageClicks++;
+    } else if (event.srcElement.id === '2') {
+      allImages[imageIndex2].imageClicks++;
+    } else if (event.srcElement.id === '3') {
+      allImages[imageIndex3].imageClicks++;
     }
+  }
+  if (totalClicks < userCount) {
     // pick 3 random images to display
     var nextImageIndex1 = Math.floor(Math.random() * allImages.length);
     while ((nextImageIndex1 === imageIndex1) || (nextImageIndex1 === imageIndex2) || (nextImageIndex1 === imageIndex3) || (nextImageIndex1 === imageIndex3)) {
