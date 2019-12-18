@@ -7,14 +7,14 @@ var imageIndex2 = 0;
 var imageIndex3 = 0;
 var totalClicks = -1;
 // controls how many times a user can make a selection
-var userCount = 1;
+var userCount = 25;
 // object constructor for all images
 var allImages = [];
-function Image(name, imageUrl){
+function Image(name, imageUrl, imageClicks = 0, imageViews = 0){
   this.name = name;
   this.imageUrl = imageUrl;
-  this.imageClicks = 0;
-  this.imageViews = 0;
+  this.imageClicks = imageClicks;
+  this.imageViews = imageViews;
   allImages.push(this);
 }
 
@@ -26,26 +26,40 @@ function imageArray(property) {
   }
   return answer;
 }
-// Create images
-new Image('bag', 'img/bag.jpg');
-new Image('banana', 'img/banana.jpg');
-new Image('bathroom', 'img/bathroom.jpg');
-new Image('boots', 'img/boots.jpg');
-new Image('breakfast', 'img/breakfast.jpg');
-new Image('bubblegum', 'img/bubblegum.jpg');
-new Image('chair', 'img/chair.jpg');
-new Image('cthulu', 'img/cthulhu.jpg');
-new Image('dog-duck', 'img/dog-duck.jpg');
-new Image('dragon', 'img/dragon.jpg');
-new Image('pen', 'img/pen.jpg');
-new Image('pet-sweep', 'img/pet-sweep.jpg');
-new Image('scissors', 'img/scissors.jpg');
-new Image('shark', 'img/shark.jpg');
-new Image('sweep', 'img/sweep.png');
-new Image('tauntaun', 'img/tauntaun.jpg');
-new Image('unicorn', 'img/unicorn.jpg');
-new Image('water-can', 'img/water-can.jpg');
-new Image('wine-glass', 'img/wine-glass.jpg');
+// check to see if there is saved image data in local storage
+var savedImageString = localStorage.getItem('allImages');
+if (savedImageString) {
+  // reconstruct image objects
+  var arrayOfNotImages = JSON.parse(savedImageString);
+  // turn into images
+  for (var i = 0; i < arrayOfNotImages.length; i++) {
+    new Image(arrayOfNotImages[i].name, arrayOfNotImages[i].imageUrl, arrayOfNotImages[i].imageClicks, arrayOfNotImages[i].imageViews);
+  }
+} else {
+  // Create images
+  new Image('bag', 'img/bag.jpg');
+  new Image('banana', 'img/banana.jpg');
+  new Image('bathroom', 'img/bathroom.jpg');
+  new Image('boots', 'img/boots.jpg');
+  new Image('breakfast', 'img/breakfast.jpg');
+  new Image('bubblegum', 'img/bubblegum.jpg');
+  new Image('chair', 'img/chair.jpg');
+  new Image('cthulu', 'img/cthulhu.jpg');
+  new Image('dog-duck', 'img/dog-duck.jpg');
+  new Image('dragon', 'img/dragon.jpg');
+  new Image('pen', 'img/pen.jpg');
+  new Image('pet-sweep', 'img/pet-sweep.jpg');
+  new Image('scissors', 'img/scissors.jpg');
+  new Image('shark', 'img/shark.jpg');
+  new Image('sweep', 'img/sweep.png');
+  new Image('tauntaun', 'img/tauntaun.jpg');
+  new Image('unicorn', 'img/unicorn.jpg');
+  new Image('water-can', 'img/water-can.jpg');
+  new Image('wine-glass', 'img/wine-glass.jpg');
+}
+
+
+
 
 // creates random color for dataset from https://stackoverflow.com/questions/1484506/random-color-generator
 var clicksColorArray = [];
@@ -149,28 +163,9 @@ function displayImages(event) {
     for (var i = 1; i < imageEl.length; i++) {
       imageEl[i].removeEventListener('click', displayImages);
     }
-
-
-
-    // stores results in local storage
-    if (localStorage.getItem('allImages') === null) {
-      localStorage.setItem('allImages', JSON.stringify(allImages));
-    } else {
-      var imageStorageArray = JSON.parse(localStorage.getItem('allImages'));
-      console.log(imageStorageArray);
-      // for (var i = 0; i < imageStorageArray.length; i ++) {
-      //   console.log(imageStorageArray[i].name);
-      //   new Image(imageStorageArray[i].name, imageStorageArray[i].imageUrl, imageStorageArray[i].imageClicks, imageStorageArray[i].imageViews);
-        
-
-      }
-    
-
-
-
-
-  }
-      
+    // store new results
+    localStorage.setItem('allImages', JSON.stringify(allImages));
+  }      
 }
 
 // create an event listener for images
