@@ -54,6 +54,7 @@ if (savedImageString) {
   new Image('sweep', 'img/sweep.png');
   new Image('tauntaun', 'img/tauntaun.jpg');
   new Image('unicorn', 'img/unicorn.jpg');
+  new Image('usb', 'img/usb.gif');
   new Image('water-can', 'img/water-can.jpg');
   new Image('wine-glass', 'img/wine-glass.jpg');
 }
@@ -79,7 +80,7 @@ function randomColorArray() {
 randomColorArray();
 
 
-// function for when there is an event
+// function that will display 3 random images different from the prevous ones
 function displayImages(event) {
   totalClicks++;
   // if there was no event then ignore this condition
