@@ -54,6 +54,7 @@ if (savedImageString) {
   new Image('sweep', 'img/sweep.png');
   new Image('tauntaun', 'img/tauntaun.jpg');
   new Image('unicorn', 'img/unicorn.jpg');
+  new Image('usb', 'img/usb.gif');
   new Image('water-can', 'img/water-can.jpg');
   new Image('wine-glass', 'img/wine-glass.jpg');
 }
@@ -79,7 +80,7 @@ function randomColorArray() {
 randomColorArray();
 
 
-// function for when there is an event
+// function that will display 3 random images different from the prevous ones
 function displayImages(event) {
   totalClicks++;
   // if there was no event then ignore this condition
@@ -127,6 +128,7 @@ function displayImages(event) {
       listItem.textContent = `${allImages[i].name}: ${allImages[i].imageClicks} votes, ${allImages[i].imageViews} views.` ;
       listContainer.appendChild(listItem);
     }
+    // creates chart to display results
     var ctx = document.getElementById('resultsChart');
     var myChart = new Chart(ctx, {
         type: 'bar',
@@ -173,6 +175,6 @@ function displayImages(event) {
 for (var i = 1; i < imageEl.length; i++) {
   imageEl[i].addEventListener('click', displayImages);
 }
-
+// displays random images with every page refresh
 displayImages();
 
