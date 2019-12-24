@@ -128,6 +128,7 @@ function displayImages(event) {
       listItem.textContent = `${allImages[i].name}: ${allImages[i].imageClicks} votes, ${allImages[i].imageViews} views.` ;
       listContainer.appendChild(listItem);
     }
+    // creates chart to display results
     var ctx = document.getElementById('resultsChart');
     var myChart = new Chart(ctx, {
         type: 'bar',
@@ -174,6 +175,6 @@ function displayImages(event) {
 for (var i = 1; i < imageEl.length; i++) {
   imageEl[i].addEventListener('click', displayImages);
 }
-
+// displays random images with every page refresh
 displayImages();
 
